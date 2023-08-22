@@ -1,0 +1,21 @@
+{
+  "name": "@quickcase/javascript-sdk",
+  "version": "0.0.0",
+  "description": "Development kit to build QuickCase-flavoured JavaScript applications",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quickcase/javascript-sdk.git"
+  },
+  "keywords": [
+    "quickcase"
+  ],
+  "author": "QuickCase",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quickcase/javascript-sdk/issues"
+  },
+  "homepage": "https://github.com/quickcase/javascript-sdk#readme"
+}
