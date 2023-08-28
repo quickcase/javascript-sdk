@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Development kit to build QuickCase-flavoured JavaScript applications",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest src",
     "build": "webpack"
   },
   "repository": {
@@ -23,7 +23,22 @@
     "> 0.1%, defaults"
   ],
   "devDependencies": {
+    "jest": "^29.6.4",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "html"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   }
 }
