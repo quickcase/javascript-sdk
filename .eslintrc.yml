@@ -13,3 +13,7 @@ plugins:
   - compat
   - jest
 rules: {}
+settings:
+  polyfills:
+    - Object.entries
+    - Object.fromEntries

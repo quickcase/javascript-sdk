@@ -44,5 +44,8 @@
         "statements": 100
       }
     }
+  },
+  "dependencies": {
+    "core-js": "^3.32.1"
   }
 }
