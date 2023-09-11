@@ -362,6 +362,29 @@ describe('extracting metadata', () => {
     ]);
   });
 
+  test('should extract title', () => {
+    const record = {
+      id: '1111222233334444',
+      metadata: {
+        title: 'A distinctive title',
+      },
+      data: {
+        title: 'Wrong', // <-- Ignore, not metadata
+      },
+    };
+
+    const values = extractValue(record)([
+      '[title]',
+      '[TITLE]', // Case-insensitive
+      'title', // Field, not metadata
+    ]);
+    expect(values).toEqual([
+      'A distinctive title',
+      'A distinctive title',
+      'Wrong',
+    ]);
+  });
+
   test('should extract state', () => {
     const record = {
       state: 'inProgress',

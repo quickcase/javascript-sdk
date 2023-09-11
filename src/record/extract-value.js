@@ -35,6 +35,8 @@ const metadataExtractor = (record) => (path) => {
       return record.case_type_id;
     case Metadata.REFERENCE:
       return record.id;
+    case Metadata.TITLE:
+      return record.metadata?.title;
     case Metadata.STATE:
       return record.state;
     case Metadata.CLASSIFICATION:
