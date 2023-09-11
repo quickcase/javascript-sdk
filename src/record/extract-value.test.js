@@ -276,10 +276,10 @@ describe('extracting collection items', () => {
 });
 
 describe('extracting metadata', () => {
-  test('should returned undefined when metadata does not exist', () => {
+  test('should throw error when metadata name does not exist', () => {
     const record = {};
 
-    expect(() => extractValue(record)('[not_a_metadata]')).toBeUndefined();
+    expect(() => extractValue(record)('[not_a_metadata]')).toThrow(`No metadata with name '[not_a_metadata]'`);
   });
 
   test('should extract workspace', () => {

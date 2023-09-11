@@ -44,7 +44,7 @@ const metadataExtractor = (record) => (path) => {
     case Metadata.LAST_MODIFIED_AT:
       return record.last_modified;
     default:
-      return;
+      throw new Error(`No metadata with name '${path}'`);
   }
 };
 
