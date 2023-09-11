@@ -282,11 +282,45 @@ describe('extracting metadata', () => {
     expect(() => extractValue(record)('[not_a_metadata]')).toThrow(`No metadata with name '[not_a_metadata]'`);
   });
 
+  test('should support legacy record format (API v1 & v2)', () => {
+    const record = {
+      id: '1111222233334444',
+      jurisdiction: 'Workspace-1',
+      case_type_id: 'Type1',
+      state: 'inProgress',
+      security_classification: 'PUBLIC',
+      created_date: '2023-02-22T11:22:33.000Z',
+      last_modified: '2023-08-14T11:22:33.000Z',
+      data: {},
+    };
+
+    const values = extractValue(record)([
+      '[workspace]',
+      '[type]',
+      '[reference]',
+      '[state]',
+      '[classification]',
+      '[createdAt]',
+      '[lastModifiedAt]',
+    ]);
+    expect(values).toEqual([
+      'Workspace-1',
+      'Type1',
+      '1111222233334444',
+      'inProgress',
+      'PUBLIC',
+      '2023-02-22T11:22:33.000Z',
+      '2023-08-14T11:22:33.000Z',
+    ]);
+  });
+
   test('should extract workspace', () => {
     const record = {
-      jurisdiction: 'Workspace-1',
+      metadata: {
+        workspace: 'Workspace-1'
+      },
       data: {
-        jurisdiction: 'Wrong', // <-- Ignore, not metadata
+        workspace: 'Wrong', // <-- Ignore, not metadata
       },
     };
 
@@ -297,7 +331,7 @@ describe('extracting metadata', () => {
       '[ORGANISATION]', // Legacy alias, case insensitive
       '[jurisdiction]', // Legacy alias
       '[JURISDICTION]', // Legacy alias, case insensitive
-      'jurisdiction', // Field, not metadata
+      'workspace', // Field, not metadata
     ]);
     expect(values).toEqual([
       'Workspace-1',
@@ -312,9 +346,11 @@ describe('extracting metadata', () => {
 
   test('should extract type', () => {
     const record = {
-      case_type_id: 'Type1',
+      metadata: {
+        type: 'Type1',
+      },
       data: {
-        case_type_id: 'Wrong', // <-- Ignore, not metadata
+        type: 'Wrong', // <-- Ignore, not metadata
       },
     };
 
@@ -323,7 +359,7 @@ describe('extracting metadata', () => {
       '[TYPE]', // Case insensitive
       '[case_type]', // Legacy alias
       '[CASE_TYPE]', // Legacy alias, case insensitive
-      'case_type_id', // Field, not metadata
+      'type', // Field, not metadata
     ]);
     expect(values).toEqual([
       'Type1',
@@ -387,7 +423,9 @@ describe('extracting metadata', () => {
 
   test('should extract state', () => {
     const record = {
-      state: 'inProgress',
+      metadata: {
+        state: 'inProgress',
+      },
       data: {
         state: 'Wrong', // <-- Ignore, not metadata
       },
@@ -407,9 +445,11 @@ describe('extracting metadata', () => {
 
   test('should extract security classification', () => {
     const record = {
-      security_classification: 'PUBLIC',
+      metadata: {
+        classification: 'PUBLIC',
+      },
       data: {
-        security_classification: 'Wrong', // <-- Ignore, not metadata
+        classification: 'Wrong', // <-- Ignore, not metadata
       },
     };
 
@@ -418,7 +458,7 @@ describe('extracting metadata', () => {
       '[CLASSIFICATION]', // Case insensitive
       '[security_classification]', // Alias
       '[SECURITY_CLASSIFICATION]', // Alias, case-insensitive
-      'security_classification', // Field, not metadata
+      'classification', // Field, not metadata
     ]);
     expect(values).toEqual([
       'PUBLIC',
@@ -431,9 +471,11 @@ describe('extracting metadata', () => {
 
   test('should extract created date', () => {
     const record = {
-      created_date: '2023-02-22T11:22:33.000Z',
+      metadata: {
+        createdAt: '2023-02-22T11:22:33.000Z',
+      },
       data: {
-        created_date: 'Wrong', // <-- Ignore, not metadata
+        createdAt: 'Wrong', // <-- Ignore, not metadata
       },
     };
 
@@ -442,7 +484,7 @@ describe('extracting metadata', () => {
       '[CREATEDAT]', // Case insensitive
       '[created_date]', // Legacy alias
       '[CREATED_DATE]', // Legacy alias, case-insensitive
-      'created_date', // Field, not metadata
+      'createdAt', // Field, not metadata
     ]);
     expect(values).toEqual([
       '2023-02-22T11:22:33.000Z',
@@ -455,9 +497,11 @@ describe('extracting metadata', () => {
 
   test('should extract last modified date', () => {
     const record = {
-      last_modified: '2023-02-22T11:22:33.000Z',
+      metadata: {
+        lastModifiedAt: '2023-02-22T11:22:33.000Z',
+      },
       data: {
-        last_modified: 'Wrong', // <-- Ignore, not metadata
+        lastModifiedAt: 'Wrong', // <-- Ignore, not metadata
       },
     };
 
@@ -466,7 +510,7 @@ describe('extracting metadata', () => {
       '[LASTMODIFIEDAT]', // Case insensitive
       '[last_modified]', // Alias
       '[LAST_MODIFIED]', // Alias, case-insensitive
-      'last_modified', // Field, not metadata
+      'lastModifiedAt', // Field, not metadata
     ]);
     expect(values).toEqual([
       '2023-02-22T11:22:33.000Z',

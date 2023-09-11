@@ -28,23 +28,26 @@ const valueExtractor = (record) => (path) => {
 const metadataExtractor = (record) => (path) => {
   const metadata = Metadata.normaliseName(path);
 
+  // Detect legacy API v1 & v2 records
+  const legacy = !record.metadata;
+
   switch (metadata) {
     case Metadata.WORKSPACE:
-      return record.jurisdiction;
+      return legacy ? record.jurisdiction : record.metadata.workspace;
     case Metadata.TYPE:
-      return record.case_type_id;
+      return legacy ? record.case_type_id: record.metadata.type;
     case Metadata.REFERENCE:
       return record.id;
     case Metadata.TITLE:
       return record.metadata?.title;
     case Metadata.STATE:
-      return record.state;
+      return legacy ? record.state : record.metadata.state;
     case Metadata.CLASSIFICATION:
-      return record.security_classification;
+      return legacy? record.security_classification : record.metadata.classification;
     case Metadata.CREATED_AT:
-      return record.created_date;
+      return legacy ? record.created_date : record.metadata.createdAt;
     case Metadata.LAST_MODIFIED_AT:
-      return record.last_modified;
+      return legacy ? record.last_modified : record.metadata.lastModifiedAt;
     default:
       throw new Error(`No metadata with name '${path}'`);
   }
