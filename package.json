@@ -3,6 +3,14 @@
   "version": "0.0.0",
   "description": "Development kit to build QuickCase-flavoured JavaScript applications",
   "type": "module",
+  "main": "dist/main.js",
+  "exports": {
+    "import": "./dist/main.mjs",
+    "require": "./dist/main.js"
+  },
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "test": "jest src",
     "build": "webpack",
