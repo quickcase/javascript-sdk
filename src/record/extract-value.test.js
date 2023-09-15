@@ -297,7 +297,7 @@ describe('extracting metadata', () => {
     const values = extractValue(record)([
       '[workspace]',
       '[type]',
-      '[reference]',
+      '[id]',
       '[state]',
       '[classification]',
       '[createdAt]',
@@ -379,10 +379,10 @@ describe('extracting metadata', () => {
     };
 
     const values = extractValue(record)([
-      '[reference]',
-      '[REFERENCE]', // Case-insensitive
-      '[id]', // Legacy alias
-      '[ID]', // Legacy alias, case insensitive
+      '[id]',
+      '[ID]', // Case-insensitive
+      '[reference]', // Legacy alias
+      '[REFERENCE]', // Legacy alias, case insensitive
       '[case_reference]', // Legacy alias
       '[CASE_REFERENCE]', // Legacy alias, case-insensitive
       'id', // Field, not metadata

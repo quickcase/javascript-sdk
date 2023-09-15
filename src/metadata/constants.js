@@ -1,6 +1,6 @@
 export const WORKSPACE = '[workspace]';
 export const TYPE = '[type]';
-export const REFERENCE = '[reference]';
+export const ID = '[id]';
 export const TITLE = '[title]';
 export const STATE = '[state]';
 export const CLASSIFICATION = '[classification]';

@@ -17,10 +17,10 @@ const normaliseName = (metadataName) => {
     case 'type':
     case 'case_type': // Legacy
       return NAMES.TYPE;
-    case 'reference':
-    case 'id': // Legacy
+    case 'id':
+    case 'reference': // Legacy
     case 'case_reference': // Legacy
-      return NAMES.REFERENCE;
+      return NAMES.ID;
     case 'title':
       return NAMES.TITLE;
     case 'state':

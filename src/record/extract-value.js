@@ -36,7 +36,7 @@ const metadataExtractor = (record) => (path) => {
       return legacy ? record.jurisdiction : record.metadata.workspace;
     case Metadata.TYPE:
       return legacy ? record.case_type_id: record.metadata.type;
-    case Metadata.REFERENCE:
+    case Metadata.ID:
       return record.id;
     case Metadata.TITLE:
       return record.metadata?.title;

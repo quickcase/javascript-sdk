@@ -33,16 +33,16 @@ describe('type', () => {
   });
 });
 
-describe('reference', () => {
+describe('id', () => {
   test.each([
-    ['identity', NAMES.REFERENCE, NAMES.REFERENCE],
-    ['case insensitive', '[REFerence]', NAMES.REFERENCE],
-    ['legacy', '[case_reference]', NAMES.REFERENCE],
-    ['legacy', '[id]', NAMES.REFERENCE],
-    ['no brackets', 'reference', NAMES.REFERENCE],
-    ['no brackets + case insensitive', 'REFerence', NAMES.REFERENCE],
-    ['no brackets + legacy', 'case_reference', NAMES.REFERENCE],
-    ['no brackets + legacy', 'id', NAMES.REFERENCE],
+    ['identity', NAMES.ID, NAMES.ID],
+    ['case insensitive', '[Id]', NAMES.ID],
+    ['legacy', '[reference]', NAMES.ID],
+    ['legacy', '[case_reference]', NAMES.ID],
+    ['no brackets', 'id', NAMES.ID],
+    ['no brackets + case insensitive', 'Id', NAMES.ID],
+    ['no brackets + legacy', 'reference', NAMES.ID],
+    ['no brackets + legacy', 'case_reference', NAMES.ID],
   ])('should normalise reference name when %s (%s)', (name, actual, expected) => {
     expect(normaliseName(actual)).toBe(expected);
   });
