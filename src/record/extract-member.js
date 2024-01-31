@@ -1,7 +1,7 @@
 /**
  * Creates an instance of a relative value extractor for members of a complex field.
  *
- * @param {function} extract - Primed extract function, either `extractValue` or `extractMember`
+ * @param {function} extract - Primed extract function, either `extractValue`, `extractCollectionItem` or `extractMember`
  * @param {string} complexPath - Path to parent complex field
  * @returns {function(*): *} Extract function relative to complex parent
  */
