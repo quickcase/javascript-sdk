@@ -1,5 +1,5 @@
 import Mustache from 'mustache';
-import {relativeExtractor} from '../path/index.js';
+import {extractCollectionMember, extractMember} from '../record/index.js';
 
 const COERCE_BOOL_SUFFIX = '?';
 const TEMPLATE_VALUE_PATTERN = /{{{?[#^]?((?:@\.)?[a-zA-Z0-9._[\]:]+)[?]?}?}}/g;
@@ -20,14 +20,18 @@ const RecordContext = (extractor, context = new Mustache.Context()) => {
   };
 
   const pathForView = (view) => {
-    const relativeTo = context.view;
-    const path = lastLookup?.path.replace(/^@/, relativeTo);
+    const extract = context.view || extractor;
 
     if (Array.isArray(lastLookup?.value)) {
       // Build path to array item by index
-      return `${path}[${lastLookup.value.indexOf(view)}]`;
+      return extractCollectionMember(extract, lastLookup.path)(lastLookup.value.indexOf(view));
     }
-    return path;
+
+    if (lastLookup?.value && typeof lastLookup?.value === 'object') {
+      return extractMember(extract, lastLookup.path);
+    }
+
+    return;
   };
 
   context.lookup = (path) => {
@@ -36,7 +40,7 @@ const RecordContext = (extractor, context = new Mustache.Context()) => {
 
     // Iterates from current context to root context
     while (ctx) {
-      const extractValue = relativeExtractor(extractor, ctx.view);
+      const extractValue = ctx.view || extractor;
 
       // Coerce to boolean when `?` suffix used in path
       if (path.slice(-COERCE_BOOL_SUFFIX.length) === COERCE_BOOL_SUFFIX) {

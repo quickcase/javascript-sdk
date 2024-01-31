@@ -8,7 +8,7 @@ describe('parser', () => {
       Coerced boolean field path: {{hasDisability?}}
       Section:
         {{#address}}
-          Relative address field: {{@.postcode}}
+          Relative address field: {{postcode}}
           Root field: {{applicant.lastName}}
         {{/address}}
     `;
@@ -19,7 +19,7 @@ describe('parser', () => {
       'applicant.firstName',
       'hasDisability', // <-- coercion suffix trimmed
       'address',
-      '@.postcode',
+      'postcode',
       'applicant.lastName',
     ]);
   });
@@ -92,7 +92,7 @@ describe('renderer', () => {
       });
       const render = renderer(extractor);
 
-      const output = render('{{#applicant}}Hello {{@.firstName}} {{@.lastName}}{{/applicant}}');
+      const output = render('{{#applicant}}Hello {{firstName}} {{lastName}}{{/applicant}}');
 
       expect(output).toEqual('Hello Henry Tudor');
     });
@@ -105,7 +105,7 @@ describe('renderer', () => {
       });
       const render = renderer(extractor);
 
-      const output = render('{{#applicant}}Hello {{@.firstName}} {{@.lastName}}{{/applicant}}');
+      const output = render('{{#applicant}}Hello {{firstName}} {{lastName}}{{/applicant}}');
 
       expect(output).toEqual('');
     });
@@ -125,7 +125,7 @@ describe('renderer', () => {
       });
       const render = renderer(extractor);
 
-      const output = render('{{#person}}Hello {{@.firstName}} {{#@.address}}from {{@.line1}}{{/@.address}}{{/person}}');
+      const output = render('{{#person}}Hello {{firstName}} {{#address}}from {{line1}}{{/address}}{{/person}}');
 
       expect(output).toEqual('Hello Henry from 102 Petty France');
     });
@@ -145,7 +145,7 @@ describe('renderer', () => {
       });
       const render = renderer(extractor);
 
-      const output = render('{{#person}}Hello {{#@.address}}{{@.firstName}} from {{@.line1}}{{/@.address}}{{/person}}');
+      const output = render('{{#person}}Hello {{#address}}{{firstName}} from {{line1}}{{/address}}{{/person}}');
 
       // First name is rendered from parent `person` context even though it doesn't belongs to top `@.address` context
       expect(output).toEqual('Hello Henry from 102 Petty France');
@@ -153,6 +153,7 @@ describe('renderer', () => {
   });
 
   describe('Repeated section on collection with relative paths', () => {
+
     test('should render section once per collection item and resolve paths relative to collection items when collection is set and non empty', () => {
       const extractor = extractValue({
         data: {
@@ -171,7 +172,7 @@ describe('renderer', () => {
       });
       const render = renderer(extractor);
 
-      const output = render('{{#addresses}}- {{@.value.postcode}}\n{{/addresses}}');
+      const output = render('{{#addresses}}- {{postcode}}\n{{/addresses}}');
 
       expect(output).toEqual('- AA0 0AA\n- BB0 0BB\n- CC0 0CC\n');
     });
@@ -184,7 +185,7 @@ describe('renderer', () => {
       });
       const render = renderer(extractor);
 
-      const output = render('{{#addresses}}- {{@.value.postcode}}\n{{/addresses}}');
+      const output = render('{{#addresses}}- {{postcode}}\n{{/addresses}}');
 
       expect(output).toEqual('');
     });
@@ -213,7 +214,7 @@ describe('renderer', () => {
       });
       const render = renderer(extractor);
 
-      const output = render('{{#persons}}- {{#@.value.address}}Postcode: {{@.postcode}}{{/@.value.address}}\n{{/persons}}');
+      const output = render('{{#persons}}- {{#address}}Postcode: {{postcode}}{{/address}}\n{{/persons}}');
 
       expect(output).toEqual('- Postcode: AA0 0AA\n- Postcode: BB0 0BB\n- Postcode: CC0 0CC\n');
     });
