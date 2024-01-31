@@ -33,7 +33,7 @@
     "> 0.1%, defaults"
   ],
   "devDependencies": {
-    "@babel/core": "^7.22.17",
+    "@babel/core": "^7.23.9",
     "@babel/plugin-transform-modules-commonjs": "^7.22.15",
     "@babel/preset-env": "^7.23.9",
     "babel-loader": "^9.1.3",
