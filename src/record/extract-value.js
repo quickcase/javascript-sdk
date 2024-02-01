@@ -1,7 +1,7 @@
+import {isMetadata} from '../metadata/index.js';
 import * as Metadata from '../metadata/index.js';
 import comboExtractor from '../path/combo-extractor.js';
 
-const METADATA_START = '[';
 const COLLECTION_ITEM_PATTERN = /^(?<name>[^[\]]+)(?:\[(?:(?<colIndex>\d+)|id:(?<colId>[^[\]]+))\])?$/;
 
 /**
@@ -17,7 +17,7 @@ const COLLECTION_ITEM_PATTERN = /^(?<name>[^[\]]+)(?:\[(?:(?<colIndex>\d+)|id:(?
 const extractValue = (record) => comboExtractor(valueExtractor(record))
 
 const valueExtractor = (record) => (path) => {
-  if (path[0] === METADATA_START) {
+  if (isMetadata(path)) {
     return metadataExtractor(record)(path);
   }
 
