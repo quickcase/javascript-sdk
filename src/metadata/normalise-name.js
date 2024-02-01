@@ -29,10 +29,13 @@ const normaliseName = (metadataName) => {
     case 'security_classification': // Legacy
       return NAMES.CLASSIFICATION;
     case 'createdat':
+    case 'created': // Legacy
     case 'created_date': // Legacy
       return NAMES.CREATED_AT;
     case 'lastmodifiedat':
+    case 'modified': // Legacy
     case 'last_modified': // Legacy
+    case 'last_modified_date': // Legacy
       return NAMES.LAST_MODIFIED_AT;
     default:
       return;

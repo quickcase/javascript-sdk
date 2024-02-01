@@ -87,6 +87,7 @@ describe('createdAt', () => {
   test.each([
     ['identity', NAMES.CREATED_AT, NAMES.CREATED_AT],
     ['case insensitive', '[CREATEDat]', NAMES.CREATED_AT],
+    ['legacy', '[created]', NAMES.CREATED_AT],
     ['legacy', '[created_date]', NAMES.CREATED_AT],
     ['no brackets', 'createdAt', NAMES.CREATED_AT],
     ['no brackets + case insensitive', 'CREATEDat', NAMES.CREATED_AT],
@@ -100,7 +101,9 @@ describe('lastModifiedAt', () => {
   test.each([
     ['identity', NAMES.LAST_MODIFIED_AT, NAMES.LAST_MODIFIED_AT],
     ['case insensitive', '[lastMODIFIEDat]', NAMES.LAST_MODIFIED_AT],
+    ['legacy', '[modified]', NAMES.LAST_MODIFIED_AT],
     ['legacy', '[last_modified]', NAMES.LAST_MODIFIED_AT],
+    ['legacy', '[last_modified_date]', NAMES.LAST_MODIFIED_AT],
     ['no brackets', 'lastModifiedAt', NAMES.LAST_MODIFIED_AT],
     ['no brackets + case insensitive', 'lastMODIFIEDat', NAMES.LAST_MODIFIED_AT],
     ['no brackets + legacy', 'last_modified', NAMES.LAST_MODIFIED_AT],
