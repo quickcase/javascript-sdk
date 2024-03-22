@@ -23,7 +23,10 @@ const valueExtractor = (record) => (path) => {
   }
 
   const caseData = dataExtractor(record);
-  return caseData ? field(caseData)(path.replace(Path.ABSOLUTE_START, '').split('.').map(parsePathElement)) : undefined;
+  const parsedPath = path.replace(Path.ABSOLUTE_START, '')
+                         .split(Path.SEPARATOR)
+                         .map(parsePathElement);
+  return caseData ? field(caseData)(parsedPath) : undefined;
 };
 
 const metadataExtractor = (record) => (path) => {
