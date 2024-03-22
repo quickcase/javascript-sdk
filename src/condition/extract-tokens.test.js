@@ -45,10 +45,10 @@ test.each([
     ],
   ],
   [
-    'Relative field path',
-    '@.level1.child1 = "Yes"',
+    'Absolute field path',
+    '$.level1.child1 = "Yes"',
     [
-      '@.level1.child1', '=', '"Yes"',
+      '$.level1.child1', '=', '"Yes"',
     ],
   ],
   [

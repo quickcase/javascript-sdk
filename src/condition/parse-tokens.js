@@ -1,6 +1,6 @@
 import {SyntaxError} from './errors.js';
 
-const FIELD_PATH_PATTERN = /^(?:@\.)?[a-zA-Z0-9_]+(?:\[(?:id:[a-zA-Z0-9_]+|[0-9]+)])?(?:\.[a-zA-Z0-9_]+(?:\[(?:id:[a-zA-Z0-9_]+|[0-9]+)])?)*$/;
+const FIELD_PATH_PATTERN = /^(?:\$\.)?[a-zA-Z0-9_]+(?:\[(?:id:[a-zA-Z0-9_]+|[0-9]+)])?(?:\.[a-zA-Z0-9_]+(?:\[(?:id:[a-zA-Z0-9_]+|[0-9]+)])?)*$/;
 
 const xor = (a, b) => Boolean(a) !== Boolean(b);
 
