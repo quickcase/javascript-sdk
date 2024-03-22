@@ -1,3 +1,5 @@
+import {isAbsolute, isMetadata} from '../path/index.js';
+
 /**
  * Creates an instance of a relative value extractor for members of a complex collection field.
  *
@@ -11,7 +13,7 @@ const extractCollectionMember = (extract, collectionPath) => (item) => (path) =>
 };
 
 const resolvePath = (parentPath) => (item) => (path) => {
-  if (path[0] === '[') {
+  if (isMetadata(path) || isAbsolute(path)) {
     return path;
   }
 

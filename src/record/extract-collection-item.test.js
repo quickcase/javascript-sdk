@@ -1,9 +1,11 @@
+import extractCollectionMember from './extract-collection-member.js';
 import extractValue from './extract-value.js';
 import extractCollectionItem from './extract-collection-item.js';
 
 const extractor = extractValue({
   id: '1111222233334444',
   data: {
+    'field0': 'Root value 0',
     'collection1': [
       {id: 'item-1', value: 'Value 1'},
       {id: 'item-2', value: 'Value 2'},
@@ -29,6 +31,12 @@ describe('when single item path', () => {
     expect(
       extractCollectionItem(extractor, 'collection1')('[id]')
     ).toEqual('1111222233334444');
+  });
+
+  test('should extract absolute path from root', () => {
+    expect(
+      extractCollectionItem(extractor, 'collection1')('$.field0')
+    ).toEqual('Root value 0');
   });
 });
 

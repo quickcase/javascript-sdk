@@ -4,6 +4,7 @@ import extractMember from './extract-member.js';
 const extractor = extractValue({
   id: '1111222233334444',
   data: {
+    'field0': 'Root value 0',
     'complex1': {
       'member1': 'Value 1',
       'member2': 'Value 2',
@@ -23,6 +24,12 @@ describe('when single member path', () => {
     expect(
       extractMember(extractor, 'complex1')('[id]')
     ).toEqual('1111222233334444');
+  });
+
+  test('should extract absolute path from root', () => {
+    expect(
+      extractMember(extractor, 'complex1')('$.field0')
+    ).toEqual('Root value 0');
   });
 });
 

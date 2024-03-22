@@ -4,6 +4,7 @@ import extractValue from './extract-value.js';
 const extractor = extractValue({
   id: '1111222233334444',
   data: {
+    'field0': 'Root value 0',
     'collection1': [
       {
         id: 'item-1',
@@ -44,6 +45,11 @@ describe('when single item path', () => {
   test('should extract metadata from root', () => {
     const extract = extractCollectionMember(extractor, 'collection1')('item-2');
     expect(extract('[id]')).toEqual('1111222233334444');
+  });
+
+  test('should extract absolute path from root', () => {
+    const extract = extractCollectionMember(extractor, 'collection1')('item-2');
+    expect(extract('$.field0')).toEqual('Root value 0');
   });
 });
 
