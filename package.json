@@ -12,8 +12,9 @@
     "dist/"
   ],
   "scripts": {
-    "test": "jest src",
+    "prepare": "npm run build",
     "build": "webpack",
+    "test": "jest src",
     "lint": "eslint src"
   },
   "repository": {
