@@ -45,7 +45,6 @@ const RecordContext = (extractor, context = new Mustache.Context()) => {
         path = path.slice(0, -COERCE_BOOL_SUFFIX.length);
         value = extractValue(path)?.toLowerCase() === 'yes';
       } else {
-        console.log(extractValue);
         value = extractValue(path);
       }
 
