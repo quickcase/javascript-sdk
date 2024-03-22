@@ -38,6 +38,19 @@ test('should extract field from record `case_data`', () => {
   expect(fieldValue).toEqual('value');
 });
 
+test('should extract field using explicit absolute path', () => {
+  const record = {
+    data: {
+      level1: {
+        level2: 'value'
+      }
+    }
+  };
+
+  const fieldValue = extractValue(record)('$.level1.level2');
+  expect(fieldValue).toEqual('value');
+});
+
 test('should extract field as undefined when path does not exist', () => {
   const record = {
     data: {
