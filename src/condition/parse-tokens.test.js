@@ -18,16 +18,16 @@ test('should parse simple conjunction condition without grouping', () => {
   });
 });
 
-test('should parse condition with relative field path', () => {
+test('should parse condition with absolute field path', () => {
   const tokens = [
-    '@.level1.child1', '===', '"value1"',
+    '$.level1.child1', '===', '"value1"',
   ];
 
   expect(parseTokens(tokens)).toEqual({
     condition: [
-      {path: '@.level1.child1', operator: 'EQUALS', value: 'value1'},
+      {path: '$.level1.child1', operator: 'EQUALS', value: 'value1'},
     ],
-    fieldPaths: ['@.level1.child1'],
+    fieldPaths: ['$.level1.child1'],
   });
 });
 

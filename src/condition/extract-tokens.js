@@ -14,8 +14,8 @@ const LOWER = Object.freeze({
 });
 
 const SYMBOLS = Object.freeze({
-  AT: 64,
   COLON: 58,
+  DOLLAR: 36,
   DOUBLE_QUOTE: 34,
   PARENTHESIS_OPEN: 40,
   PARENTHESIS_CLOSE: 41,
@@ -36,7 +36,7 @@ const GROUP_DELIMITERS = [
 ];
 
 const FIELD_PATH_SYMBOLS = [
-  SYMBOLS.AT,
+  SYMBOLS.DOLLAR,
   SYMBOLS.COLON,
   SYMBOLS.DOT,
   SYMBOLS.SQUARE_BRACKET_OPEN,
@@ -57,7 +57,7 @@ const isText = (code) => {
     return true;
   }
   if (FIELD_PATH_SYMBOLS.includes(code)) {
-    // @._[:]
+    // $._[:]
     return true;
   }
   return false;
