@@ -1,4 +1,4 @@
-import {isAbsolute, isMetadata} from '../path/index.js';
+import * as Path from '../path/index.js';
 
 /**
  * Creates an instance of a relative value extractor for members of a complex field.
@@ -13,10 +13,10 @@ const extractMember = (extract, complexPath) => (path) => {
 };
 
 const resolvePath = (parentPath) => (path) => {
-  if (isMetadata(path) || isAbsolute(path)) {
+  if (Path.isMetadata(path) || Path.isAbsolute(path)) {
     return path;
   }
-  return parentPath + '.' + path;
+  return parentPath + Path.SEPARATOR + path;
 };
 
 const processPath = (resolve) => (path) => {
