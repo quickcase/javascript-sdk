@@ -1,4 +1,4 @@
-import {isAbsolute, isRoot} from './predicates.js';
+import {isAbsolute, isRelative, isRoot} from './predicates.js';
 
 describe('isAbsolute', () => {
   test.each([
@@ -11,6 +11,20 @@ describe('isAbsolute', () => {
     ['collection[0]', false],
   ])(`should path '%s' be root: %s`, (path, expectedAbsolute) => {
     expect(isAbsolute(path)).toBe(expectedAbsolute);
+  });
+});
+
+describe('isRelative', () => {
+  test.each([
+    ['field1', true],
+    ['$.field1', false],
+    ['$.level1.level2', false],
+    ['level1.level2', true],
+    ['collection[0]', true],
+    ['$.collection[0]', false],
+    ['collection[0]', true],
+  ])(`should path '%s' be root: %s`, (path, expectedRelative) => {
+    expect(isRelative(path)).toBe(expectedRelative);
   });
 });
 
