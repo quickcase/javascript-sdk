@@ -1,4 +1,4 @@
-import {ABSOLUTE_START} from './constants.js';
+import {ABSOLUTE_START, SEPARATOR} from './constants.js';
 import {isAbsolute, isRelative} from './predicates.js';
 
 /**
@@ -8,6 +8,14 @@ import {isAbsolute, isRelative} from './predicates.js';
  * @returns {string} Absolute path (i.e. starts with `$.`)
  */
 export const absolute = (path) => isAbsolute(path) ? path : ABSOLUTE_START + path;
+
+/**
+ * Build a field path out of its individual parts.
+ *
+ * @param {...string} parts - Parts to assemble to build full path
+ * @returns {string} Assembled field path
+ */
+export const build = (...parts) => parts.join(SEPARATOR);
 
 /**
  * Make a path relative when it is not already.

@@ -1,4 +1,4 @@
-import {absolute, relative, root} from './helpers.js';
+import {absolute, build, relative, root} from './helpers.js';
 
 describe('absolute', () => {
   test.each([
@@ -10,6 +10,21 @@ describe('absolute', () => {
     ['$.collection[0]', '$.collection[0]'],
   ])(`should path '%s' be root: %s`, (path, expectedAbsolute) => {
     expect(absolute(path)).toBe(expectedAbsolute);
+  });
+});
+
+describe('build', () => {
+  test.each([
+    {parts: ['field1'], expected: 'field1'},
+    {parts: ['$.field1'], expected: '$.field1'},
+    {parts: ['level1', 'level2'], expected: 'level1.level2'},
+    {parts: ['$.level1', 'level2'], expected: '$.level1.level2'},
+    {parts: ['$.level1', 'level2', 'level3'], expected: '$.level1.level2.level3'},
+    {parts: ['$.level1.level2', 'level3'], expected: '$.level1.level2.level3'},
+    {parts: ['collection[0]', 'value', 'member'], expected: 'collection[0].value.member'},
+    {parts: ['$.collection[0]', 'value', 'member'], expected: '$.collection[0].value.member'},
+  ])('should build path: $expected', ({parts, expected}) => {
+    expect(build(...parts)).toBe(expected);
   });
 });
 
