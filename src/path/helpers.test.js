@@ -1,4 +1,17 @@
-import {root} from './helpers.js';
+import {absolute, root} from './helpers.js';
+
+describe('absolute', () => {
+  test.each([
+    ['field1', '$.field1'],
+    ['$.field1', '$.field1'],
+    ['$.level1.level2', '$.level1.level2'],
+    ['level1.level2', '$.level1.level2'],
+    ['collection[0]', '$.collection[0]'],
+    ['$.collection[0]', '$.collection[0]'],
+  ])(`should path '%s' be root: %s`, (path, expectedAbsolute) => {
+    expect(absolute(path)).toBe(expectedAbsolute);
+  });
+});
 
 describe('root', () => {
   test.each([

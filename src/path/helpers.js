@@ -1,3 +1,14 @@
+import {ABSOLUTE_START} from './constants.js';
+import {isAbsolute} from './predicates.js';
+
+/**
+ * Make a path explicitly absolute when it is not already.
+ *
+ * @param {string} path - Path to make explicitly absolute
+ * @returns {string} Absolute path (i.e. starts with `$.`)
+ */
+export const absolute = (path) => isAbsolute(path) ? path : ABSOLUTE_START + path;
+
 /**
  * Extract root field from path, excluding absolute path prefix `$.`.
  *
