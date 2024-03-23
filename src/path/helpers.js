@@ -18,6 +18,17 @@ export const absolute = (path) => isAbsolute(path) ? path : ABSOLUTE_START + pat
 export const build = (...parts) => parts.join(SEPARATOR);
 
 /**
+ * Build a path to a given item inside a collection.
+ *
+ * @param {string} collectionPath - Path to the collection
+ * @param {number | string} item - Index or ID of the item
+ * @returns {string} Path to the item
+ */
+export const buildCollectionItem = (collectionPath, item) => {
+  return build(`${collectionPath}[${Number.isInteger(item) ? item : 'id:' + item}]`, 'value');
+};
+
+/**
  * Make a path relative when it is not already.
  *
  * @param {string} path - Path to make relative

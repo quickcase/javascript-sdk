@@ -1,4 +1,4 @@
-import {isAbsolute, isMetadata} from '../path/index.js';
+import {build, buildCollectionItem, isAbsolute, isMetadata} from '../path/index.js';
 
 /**
  * Creates an instance of a relative value extractor for members of a complex collection field.
@@ -17,11 +17,7 @@ const resolvePath = (parentPath) => (item) => (path) => {
     return path;
   }
 
-  if (Number.isInteger(item)) {
-    return `${parentPath}[${item}].value.${path}`;
-  }
-
-  return `${parentPath}[id:${item}].value.${path}`;
+  return build(buildCollectionItem(parentPath, item), path);
 };
 
 const processPath = (resolve) => (path) => {
