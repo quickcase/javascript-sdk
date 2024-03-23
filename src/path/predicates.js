@@ -1,6 +1,12 @@
 import isMetadata from '../metadata/is-metadata.js';
 import {ABSOLUTE_START} from './constants.js';
 
+/**
+ * Test whether a path is explicitly absolute.
+ *
+ * @param {string} path - Path to be tested
+ * @returns {boolean} Whether the path is explicitly absolute (i.e. starts with `$.`)
+ */
 export const isAbsolute = (path) => path.slice(0,2) === ABSOLUTE_START;
 
 /**
