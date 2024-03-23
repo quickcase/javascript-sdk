@@ -21,11 +21,11 @@ export const build = (...parts) => parts.join(SEPARATOR);
  * Build a path to a given item inside a collection.
  *
  * @param {string} collectionPath - Path to the collection
- * @param {number | string} item - Index or ID of the item
+ * @param {number | string} item - Index or ID of the item; undefined if item is not relevant (e.g. definition path)
  * @returns {string} Path to the item
  */
 export const buildCollectionItem = (collectionPath, item) => {
-  return build(`${collectionPath}[${Number.isInteger(item) ? item : 'id:' + item}]`, 'value');
+  return build(`${collectionPath}[${Number.isInteger(item) ? item : item ? 'id:' + item : ''}]`, 'value');
 };
 
 /**

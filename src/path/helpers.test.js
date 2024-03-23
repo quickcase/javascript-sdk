@@ -34,10 +34,13 @@ describe('buildCollectionItem', () => {
     {collection: '$.collection', item: 0, expected: '$.collection[0].value'},
     {collection: 'collection', item: '0', expected: 'collection[id:0].value'},
     {collection: '$.collection', item: '0', expected: '$.collection[id:0].value'},
+    {collection: '$.collection', item: undefined, expected: '$.collection[].value'},
+    {collection: '$.collection', item: null, expected: '$.collection[].value'},
     {collection: '$.complex.collection', item: '0', expected: '$.complex.collection[id:0].value'},
     {collection: 'collection', item: 'some-id', expected: 'collection[id:some-id].value'},
     {collection: '$.collection', item: 'some-id', expected: '$.collection[id:some-id].value'},
     {collection: '$.complex.collection', item: 'some-id', expected: '$.complex.collection[id:some-id].value'},
+    {collection: '$.complex.collection', item: undefined, expected: '$.complex.collection[].value'},
   ])('should build path: $expected', ({collection, item, expected}) => {
     expect(buildCollectionItem(collection, item)).toBe(expected);
   });
