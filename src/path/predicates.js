@@ -10,6 +10,14 @@ import {ABSOLUTE_START} from './constants.js';
 export const isAbsolute = (path) => path.slice(0,2) === ABSOLUTE_START;
 
 /**
+ * Test whether a path is relative.
+ *
+ * @param {string} path - Path to be tested
+ * @returns {boolean} Whether the path is relative (i.e. does not start with `$.`)
+ */
+export const isRelative = (path) => !isAbsolute(path);
+
+/**
  * Test whether a path points to a root field.
  * Note: This will return true for relative paths targeting top-level members for relative to current location.
  *
