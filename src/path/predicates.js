@@ -3,6 +3,15 @@ import {ABSOLUTE_START} from './constants.js';
 
 export const isAbsolute = (path) => path.slice(0,2) === ABSOLUTE_START;
 
+/**
+ * Test whether a path points to a root field.
+ * Note: This will return true for relative paths targeting top-level members for relative to current location.
+ *
+ * @param {string} path - Path to be tested
+ * @returns {boolean} Whether the path points to a root field
+ */
+export const isRoot = (path) => !!path.match(/^(?:\$\.)?[a-zA-Z0-9_]+$/);
+
 export {
   // Reexport `isMetadata()` for convenience
   isMetadata,
