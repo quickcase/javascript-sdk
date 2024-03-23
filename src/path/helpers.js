@@ -1,5 +1,5 @@
 import {ABSOLUTE_START} from './constants.js';
-import {isAbsolute} from './predicates.js';
+import {isAbsolute, isRelative} from './predicates.js';
 
 /**
  * Make a path explicitly absolute when it is not already.
@@ -8,6 +8,14 @@ import {isAbsolute} from './predicates.js';
  * @returns {string} Absolute path (i.e. starts with `$.`)
  */
 export const absolute = (path) => isAbsolute(path) ? path : ABSOLUTE_START + path;
+
+/**
+ * Make a path relative when it is not already.
+ *
+ * @param {string} path - Path to make relative
+ * @returns {string} Relative path (i.e. does not start with `$.`)
+ */
+export const relative = (path) => isRelative(path) ? path : path.slice(2);
 
 /**
  * Extract root field from path, excluding absolute path prefix `$.`.
