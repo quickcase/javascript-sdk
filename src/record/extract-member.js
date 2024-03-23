@@ -16,7 +16,7 @@ const resolvePath = (parentPath) => (path) => {
   if (Path.isMetadata(path) || Path.isAbsolute(path)) {
     return path;
   }
-  return parentPath + Path.SEPARATOR + path;
+  return Path.build(parentPath, path);
 };
 
 const processPath = (resolve) => (path) => {
