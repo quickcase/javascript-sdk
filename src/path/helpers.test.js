@@ -1,4 +1,4 @@
-import {absolute, build, relative, root} from './helpers.js';
+import {absolute, build, buildCollectionItem, relative, root} from './helpers.js';
 
 describe('absolute', () => {
   test.each([
@@ -25,6 +25,21 @@ describe('build', () => {
     {parts: ['$.collection[0]', 'value', 'member'], expected: '$.collection[0].value.member'},
   ])('should build path: $expected', ({parts, expected}) => {
     expect(build(...parts)).toBe(expected);
+  });
+});
+
+describe('buildCollectionItem', () => {
+  test.each([
+    {collection: 'collection', item: 0, expected: 'collection[0].value'},
+    {collection: '$.collection', item: 0, expected: '$.collection[0].value'},
+    {collection: 'collection', item: '0', expected: 'collection[id:0].value'},
+    {collection: '$.collection', item: '0', expected: '$.collection[id:0].value'},
+    {collection: '$.complex.collection', item: '0', expected: '$.complex.collection[id:0].value'},
+    {collection: 'collection', item: 'some-id', expected: 'collection[id:some-id].value'},
+    {collection: '$.collection', item: 'some-id', expected: '$.collection[id:some-id].value'},
+    {collection: '$.complex.collection', item: 'some-id', expected: '$.complex.collection[id:some-id].value'},
+  ])('should build path: $expected', ({collection, item, expected}) => {
+    expect(buildCollectionItem(collection, item)).toBe(expected);
   });
 });
 
