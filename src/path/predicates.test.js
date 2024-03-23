@@ -9,7 +9,8 @@ describe('isAbsolute', () => {
     ['collection[0]', false],
     ['$.collection[0]', true],
     ['collection[0]', false],
-  ])(`should path '%s' be root: %s`, (path, expectedAbsolute) => {
+    ['[state]', true], // Metadata paths are absolute by nature
+  ])(`should path '%s' be absolute: %s`, (path, expectedAbsolute) => {
     expect(isAbsolute(path)).toBe(expectedAbsolute);
   });
 });
@@ -23,7 +24,8 @@ describe('isRelative', () => {
     ['collection[0]', true],
     ['$.collection[0]', false],
     ['collection[0]', true],
-  ])(`should path '%s' be root: %s`, (path, expectedRelative) => {
+    ['[state]', false], // Metadata paths are absolute by nature
+  ])(`should path '%s' be relative: %s`, (path, expectedRelative) => {
     expect(isRelative(path)).toBe(expectedRelative);
   });
 });

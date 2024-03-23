@@ -7,7 +7,7 @@ import {ABSOLUTE_START} from './constants.js';
  * @param {string} path - Path to be tested
  * @returns {boolean} Whether the path is explicitly absolute (i.e. starts with `$.`)
  */
-export const isAbsolute = (path) => path.slice(0,2) === ABSOLUTE_START;
+export const isAbsolute = (path) => isMetadata(path) || path.slice(0,2) === ABSOLUTE_START;
 
 /**
  * Test whether a path is relative.
