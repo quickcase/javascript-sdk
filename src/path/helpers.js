@@ -22,10 +22,17 @@ export const build = (...parts) => parts.join(SEPARATOR);
  *
  * @param {string} collectionPath - Path to the collection
  * @param {number | string} item - Index or ID of the item; undefined if item is not relevant (e.g. definition path)
- * @returns {string} Path to the item
+ * @param {boolean} targetValue - Whether to target the item value or the item root, defaults to `true` for backward compatibility
+ * @returns {string} Path to the item root or value
  */
-export const buildCollectionItem = (collectionPath, item) => {
-  return build(`${collectionPath}[${Number.isInteger(item) ? item : item ? 'id:' + item : ''}]`, 'value');
+export const buildCollectionItem = (collectionPath, item, targetValue = true) => {
+  const itemPath = `${collectionPath}[${Number.isInteger(item) ? item : item ? 'id:' + item : ''}]`;
+
+  if (targetValue) {
+    return build(itemPath, 'value');
+  }
+
+  return itemPath;
 };
 
 /**
