@@ -10,6 +10,9 @@ on:
     - cron: '0 0 * * *'
 permissions:
   contents: read
+env:
+  NODE_VERSION: 20
+
 jobs:
   quality_checks:
     name: Quality checks
@@ -41,10 +44,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup NodeJS 20
+      - name: Setup NodeJS
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
       - name: Audit dependencies
@@ -78,10 +81,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup NodeJS 20
+      - name: Setup NodeJS
         uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
           registry-url: https://registry.npmjs.org
           scope: '@quickcase'
