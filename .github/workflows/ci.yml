@@ -9,6 +9,7 @@ on:
   schedule:
     - cron: '0 0 * * *'
 permissions:
+  id-token: write # Required for publishing to NPM (Trusted Publishers)
   contents: read
 env:
   NODE_VERSION: 26
@@ -85,9 +86,9 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
           registry-url: https://registry.npmjs.org
           scope: '@quickcase'
+          package-manager-cache: false
 
       - name: Install deps
         run: npm ci
@@ -97,5 +98,3 @@ jobs:
 
       - name: Publish
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
