@@ -41,8 +41,24 @@ describe('buildCollectionItem', () => {
     {collection: '$.collection', item: 'some-id', expected: '$.collection[id:some-id].value'},
     {collection: '$.complex.collection', item: 'some-id', expected: '$.complex.collection[id:some-id].value'},
     {collection: '$.complex.collection', item: undefined, expected: '$.complex.collection[].value'},
-  ])('should build path: $expected', ({collection, item, expected}) => {
+  ])('should build path to item value: $expected', ({collection, item, expected}) => {
     expect(buildCollectionItem(collection, item)).toBe(expected);
+  });
+
+  test.each([
+    {collection: 'collection', item: 0, expected: 'collection[0]'},
+    {collection: '$.collection', item: 0, expected: '$.collection[0]'},
+    {collection: 'collection', item: '0', expected: 'collection[id:0]'},
+    {collection: '$.collection', item: '0', expected: '$.collection[id:0]'},
+    {collection: '$.collection', item: undefined, expected: '$.collection[]'},
+    {collection: '$.collection', item: null, expected: '$.collection[]'},
+    {collection: '$.complex.collection', item: '0', expected: '$.complex.collection[id:0]'},
+    {collection: 'collection', item: 'some-id', expected: 'collection[id:some-id]'},
+    {collection: '$.collection', item: 'some-id', expected: '$.collection[id:some-id]'},
+    {collection: '$.complex.collection', item: 'some-id', expected: '$.complex.collection[id:some-id]'},
+    {collection: '$.complex.collection', item: undefined, expected: '$.complex.collection[]'},
+  ])('should build path to item root: $expected', ({collection, item, expected}) => {
+    expect(buildCollectionItem(collection, item, false)).toBe(expected);
   });
 });
 
